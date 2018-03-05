@@ -35,7 +35,7 @@ def analyze_ranks(df, normal_cap, rank_type):
 
 def plot_bars(df, rank_type, savefig=False):
     """
-    Plot top 15 tax_ranks from DataFrame
+    Plot top 20 tax_ranks from DataFrame
     """
     data = df[['tax_name', 'percent_rank']][:top]
 
@@ -72,8 +72,9 @@ def plot_bars(df, rank_type, savefig=False):
 if __name__ == "__main__":
     # Read JSON and index by tax_rank
     data, normal_cap = read_JSON(path_to_JSON)
-    # Plot data as bar charts
+    
+    # Plot data as bar charts for each taxonomic classification    
     for item in rank_type:
-    # Extract a DataFrame ranked by tax_rank relative percentage
+        # Extract DataFrames ranked by tax_rank relative percentage
         ranked = analyze_ranks(data, normal_cap, item)
         plot_bars(ranked, item, savefig)
