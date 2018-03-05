@@ -26,3 +26,7 @@ As gut microbiome research continually evolves, it's exciting to keep a track of
 ## Example plot
 
 ![](boxplot.png)
+
+## uBiome Study Plot (Fig.3 )
+
+![](./_RawData/ubiome_paper_fig3.png)
