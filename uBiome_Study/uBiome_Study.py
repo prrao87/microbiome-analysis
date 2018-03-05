@@ -76,7 +76,6 @@ def main(path_to_JSON, path_to_xlsx, json_rank_type, savefig=False):
     my_data = my_data.reset_index(drop=True)
     print("Found the following genera in JSON matching with those in research study:\n")
     print(my_data.head())
-    print(my_data.head())
 
     create_boxplot(example_data, my_data, savefig)
 
