@@ -29,5 +29,5 @@ As gut microbiome research continually evolves, it's exciting to keep a track of
 
 ## uBiome Study Plot (Fig.3 )
 
-![](ubiome_paper_fig3.png)
+![](ubiome_paper_fig3.PNG)
 
