@@ -44,18 +44,24 @@ def create_boxplot(example_data, my_data, savefig):
     Plot a box plot at the genus level to replicate Fig 3. in the uBiome paper
     The individual JSON uBiome result is overlayed on the boxplot as red squares
     """
-    flierprops = {'color': 'black', 'marker': '+', 'alpha':0.1}
-    ax = example_data.plot.box(logy=True, figsize=(10, 8), whis=0.0, \
-    meanline=True, showmeans=True, flierprops=flierprops)
+    # flierprops = {'color': 'black', 'marker': '+', 'alpha':0.1}
+    ax = example_data.plot.box(logy=True, figsize=(10, 8), whis=[0, 100.0], meanline=True, \
+    showmeans=True, showfliers=False)
     ax.set_xticklabels(my_data.columns.tolist(), rotation=30, fontsize=8)
     ax.set_ylim(bottom=0.0001, top=100)
     ax.set_ylabel("Relative Abundance (%)")
     ax.set_title("Boxplot of Relative Abundance")
 
-    # Add individual values from JSON (boxplot starts indexing from 1, which is weird)
+    # Bee-swarm plot of all data points on top of boxplot - plain ol' matplotlib scatter
+    for i in range(len(example_data.columns)):
+        y = example_data.iloc[:, i]
+        x = np.random.normal(1+i, 0.04, size=len(y))
+        plt.scatter(x, y, color='k', marker='+', alpha=0.1)
+
+    # Add individual values from my JSON (boxplot starts indexing from 1, which is weird)
     # Hence we begin the range of x-values from 1 instead of zero
     plt.scatter(list(range(1, len(example_data.columns)+1)), my_data.values[0], \
-    color='r', marker='s')
+    color='r', marker='*', s=150)
     if savefig == True:
         plt.savefig('boxplot.png')
     else: plt.show()
