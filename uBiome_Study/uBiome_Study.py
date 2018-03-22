@@ -7,10 +7,11 @@ import json
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 path_to_xlsx = "_RawData/S3_Table.xlsx"
 path_to_JSON = "_RawData/ubiome-export-data-2018-02-23.json"
-savefig = False  # To save plot as png, set to 'True'
+savefig = True  # To save plot as png, set to 'True'
 
 def read_xl(path_to_xlsx):
     """Read in Excel data from uBiome paper into a pandas DataFrame"""
@@ -39,12 +40,11 @@ def analyze_ranks(df, normal_cap, rank_type):
 
     return rank_data_sorted
 
-def create_boxplot(example_data, my_data, savefig):
+def create_boxplot_matplotlib(example_data, my_data, savefig):
     """
     Plot a box plot at the genus level to replicate Fig 3. in the uBiome paper
     The individual JSON uBiome result is overlayed on the boxplot as red squares
     """
-    # flierprops = {'color': 'black', 'marker': '+', 'alpha':0.1}
     ax = example_data.plot.box(logy=True, figsize=(10, 8), whis=[0, 100.0], meanline=True, \
     showmeans=True, showfliers=False)
     ax.set_xticklabels(my_data.columns.tolist(), rotation=30, fontsize=8)
@@ -58,10 +58,42 @@ def create_boxplot(example_data, my_data, savefig):
         x = np.random.normal(1+i, 0.04, size=len(y))
         plt.scatter(x, y, color='k', marker='+', alpha=0.1)
 
-    # Add individual values from my JSON (boxplot starts indexing from 1, which is weird)
+    # Add individual values from my JSON (pandas boxplot starts indexing from 1, which is weird)
     # Hence we begin the range of x-values from 1 instead of zero
     plt.scatter(list(range(1, len(example_data.columns)+1)), my_data.values[0], \
     color='r', marker='*', s=150)
+    if savefig == True:
+        plt.savefig('boxplot.png')
+    else: plt.show()
+
+def create_boxplot_seaborn(example_data, my_data, savefig):
+    """
+    Same as create_boxplot_matplotlib, but implemented with seaborn
+    """
+    fig, ax = plt.subplots()
+    ax.set_xticklabels(my_data.columns.tolist(), rotation=30, fontsize=8)
+    ax.set(yscale='log')
+    ax.set_ylim(bottom=0.0001, top=100)
+    ax.set_ylabel("Relative Abundance (%)")
+    ax.set_title("Boxplot of Relative Abundance")
+
+    # Seaborn boxplot of uBiome data
+    sns.boxplot(data=example_data, linewidth=0.75, width=0.5, fliersize=3, \
+    whis=[0, 100.0], meanline=True, showfliers=False, showmeans=True)
+    # Add transparency to colors
+    for patch in ax.artists:
+        r, g, b, a = patch.get_facecolor()
+        patch.set_facecolor((r, g, b, .3))
+
+    # Scatter plot with jitter enabled
+    sns.stripplot(data=example_data, alpha=0.1, jitter=True, marker='o', \
+    edgecolor='k', linewidth=0.5)
+
+    # Add individual values from user JSON
+    plt.scatter(list(range(0, len(example_data.columns))), my_data.values[0], \
+    color='r', marker='*', s=150)
+    plt.tight_layout()
+
     if savefig == True:
         plt.savefig('boxplot.png')
     else: plt.show()
@@ -71,6 +103,7 @@ def main(path_to_JSON, path_to_xlsx, json_rank_type, savefig=False):
     data, normal_cap = read_JSON(path_to_JSON)
     # Extract a DataFrame ranked by tax_rank relative percentage
     json_ranked = analyze_ranks(data, normal_cap, json_rank_type)
+    # Pivot JSON dataframe to match user data data with uBiome data
     json_ranked_pivot = json_ranked.pivot(index='tax_rank', columns='tax_name', \
     values='percent_rank')
 
@@ -82,8 +115,9 @@ def main(path_to_JSON, path_to_xlsx, json_rank_type, savefig=False):
     my_data = my_data.reset_index(drop=True)
     print("Found the following genera in JSON matching with those in research study:\n")
     print(my_data.head())
+    print(example_data.head())
 
-    create_boxplot(example_data, my_data, savefig)
+    create_boxplot_seaborn(example_data, my_data, savefig)
 
 if __name__ == "__main__":
     # Only plot w.r.t. genus level as individual species detection is not reliable for now
