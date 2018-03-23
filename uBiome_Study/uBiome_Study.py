@@ -62,6 +62,8 @@ def create_boxplot_matplotlib(example_data, my_data, savefig):
     # Hence we begin the range of x-values from 1 instead of zero
     plt.scatter(list(range(1, len(example_data.columns)+1)), my_data.values[0], \
     color='r', marker='*', s=150)
+    plt.tight_layout()
+
     if savefig == True:
         plt.savefig('boxplot.png')
     else: plt.show()
@@ -91,7 +93,7 @@ def create_boxplot_seaborn(example_data, my_data, savefig):
 
     # Add individual values from user JSON
     plt.scatter(list(range(0, len(example_data.columns))), my_data.values[0], \
-    color='r', marker='*', s=150)
+    color='r', marker='*', s=150, zorder=25)
     plt.tight_layout()
 
     if savefig == True:
