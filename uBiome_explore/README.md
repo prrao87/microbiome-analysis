@@ -12,6 +12,7 @@ Bar charts are used to visualize the data (instead of pie/donut charts like in t
 ![](individual_species.png)
 
 ## Comparison plots (from `ubiome_compare.py`)
-Horizontal bar charts plot the normalized taxonomy counts. Positive means the newer sample has a higher count than the older sample, and vice versa. Comparing the top and bottom of the plot shows what main groups changed the most between the two samples. 
+Horizontal bar charts show the normalized taxonomy counts. Positive means the newer sample has a higher count than the older sample, and vice versa. Comparing the top and bottom of the plot shows what main groups changed the most between the two samples. 
 
 ![](compare_species.png)
+![](compare_genus.png)
