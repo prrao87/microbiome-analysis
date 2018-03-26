@@ -1,0 +1,122 @@
+tax_name,taxon,parent,count,count_norm,tax_rank,avg,tax_color
+Erysipelatoclostridium,1505663,-1,-5,-12226,genus,-4,-2
+Intestinibacter,1505657,-1,-5,-3487,genus,-4,-2
+Senegalimassilia,1473205,-1,-5,-2677,genus,-4,-2
+Fusicatenibacter,1407607,-1,-5,-43803,genus,-4,-2
+Dialister sp. S7MSR5,1287020,-1,-5,-5997,species,-4,-2
+Streptococcus sp. 2011_Oral_MS_A3,1244424,-1,-5,-3137,species,-4,-2
+Blautia sp. YHC-4,1157314,-1,-5,-482,species,-4,-2
+Faecalibacterium sp. canine oral taxon 147,1151492,-1,-5,-16780,species,-4,-2
+Fusicatenibacter saccharivorans,1150298,-1,-5,-27625,species,-4,-2
+Sutterellaceae,995019,-1,-5,3280,family,-4,-2
+Flavonifractor,946234,-1,-5,371,genus,-4,-2
+Negativicutes,909932,-1,-5,-65384,class,-4,-2
+Acidaminococcaceae,909930,-1,-5,442,family,-4,-2
+Selenomonadales,909929,-1,-5,-65384,order,-4,-2
+Blautia faecis,871665,-1,-5,-530,species,-4,-2
+Parasutterella,577310,-1,-5,503,genus,-4,-2
+Blautia,572511,-1,-5,24634,genus,-4,-2
+Ruminococcaceae,541000,-1,-5,-25632,family,-4,-2
+Erysipelotrichales,526525,-1,-5,-12406,order,-4,-2
+Erysipelotrichia,526524,-1,-5,-12406,class,-4,-2
+Parasutterella excrementihominis,487175,-1,-5,156,species,-4,-2
+Bacteroides sp. EBA5-17,447029,-1,-5,1168,species,-4,-2
+Adlercreutzia,447020,-1,-5,-84,genus,-4,-2
+Adlercreutzia equolifaciens,446660,-1,-5,-84,species,-4,-2
+Megamonas funiformis,437897,-1,-5,-49339,species,-4,-2
+Blautia wexlerae,418240,-1,-5,39247,species,-4,-2
+Selenomonas bovis,416586,-1,-5,-721,species,-4,-2
+Parabacteroides,375288,-1,-5,5095,genus,-4,-2
+Roseburia inulinivorans,360807,-1,-5,-7505,species,-4,-2
+Megasphaera sp. TrE9262,358646,-1,-5,-2717,species,-4,-2
+Bacteroides dorei,357276,-1,-5,67220,species,-4,-2
+Bacteroides plebeius,310297,-1,-5,182962,species,-4,-2
+Roseburia faecis,301302,-1,-5,-62301,species,-4,-2
+Flavonifractor plautii,292800,-1,-5,371,species,-4,-2
+Bacteroides nordii,291645,-1,-5,24,species,-4,-2
+Coriobacterineae,255727,-1,-5,-12458,suborder,-4,-2
+Marvinbryantia,248744,-1,-5,-608,genus,-4,-2
+Alistipes,239759,-1,-5,-1198,genus,-4,-2
+Faecalibacterium,216851,-1,-5,-25450,genus,-4,-2
+Anaerostipes,207244,-1,-5,-664,genus,-4,-2
+Actinobacteria,201174,-1,-5,22284,phylum,-4,-2
+Bacteroidia,200643,-1,-5,278301,class,-4,-2
+Turicibacter,191303,-1,-5,-179,genus,-4,-2
+Dorea,189330,-1,-5,-19575,genus,-4,-2
+Mitsuokella jalaludinii,187979,-1,-5,-2085,species,-4,-2
+Acidaminococcus intestini,187327,-1,-5,442,species,-4,-2
+Lactobacillales,186826,-1,-5,-3910,order,-4,-2
+unclassified Clostridiales,186813,-1,-5,-475,no_rank,-4,-2
+Peptostreptococcaceae,186804,-1,-5,-4034,family,-4,-2
+Lachnospiraceae,186803,-1,-5,-173021,family,-4,-2
+Clostridiales,186802,-1,-5,-218131,order,-4,-2
+Clostridia,186801,-1,-5,-218131,class,-4,-2
+Prevotellaceae,171552,-1,-5,-10932,family,-4,-2
+Porphyromonadaceae,171551,-1,-5,4796,family,-4,-2
+Rikenellaceae,171550,-1,-5,-1198,family,-4,-2
+Bacteroidales,171549,-1,-5,278301,order,-4,-2
+Roseburia intestinalis,166486,-1,-5,-1100,species,-4,-2
+Megamonas,158846,-1,-5,-48606,genus,-4,-2
+Turicibacter sanguinis,154288,-1,-5,-179,species,-4,-2
+Pasteurellales,135625,-1,-5,-3039,order,-4,-2
+cellular organisms,131567,-1,-5,0,no_rank,-4,-2
+Erysipelotrichaceae,128827,-1,-5,-12406,family,-4,-2
+Collinsella,102106,-1,-5,-9001,genus,-4,-2
+Bacilli,91061,-1,-5,-4208,class,-4,-2
+Blautia luti,89014,-1,-5,2923,species,-4,-2
+Dorea longicatena,88431,-1,-5,-19714,species,-4,-2
+Actinomycineae,85005,-1,-5,-133,suborder,-4,-2
+Bifidobacteriales,85004,-1,-5,36617,order,-4,-2
+Actinobacteridae,85003,-1,-5,34743,subclass,-4,-2
+Coriobacteriales,84999,-1,-5,-12458,order,-4,-2
+Coriobacteridae,84998,-1,-5,-12458,subclass,-4,-2
+Coriobacteriaceae,84107,-1,-5,-12458,family,-4,-2
+Burkholderiales,80840,-1,-5,3280,order,-4,-2
+Bacteroidetes/Chlorobi group,68336,-1,-5,278301,superphylum,-4,-2
+Mitsuokella,52225,-1,-5,-2085,genus,-4,-2
+Bacteroides caccae,47678,-1,-5,349,species,-4,-2
+Parabacteroides merdae,46503,-1,-5,4842,species,-4,-2
+Pseudobutyrivibrio,46205,-1,-5,-15061,genus,-4,-2
+Sutterella,40544,-1,-5,2661,genus,-4,-2
+Dialister,39948,-1,-5,-6545,genus,-4,-2
+Dorea formicigenerans,39486,-1,-5,-2290,species,-4,-2
+Lactobacillaceae,33958,-1,-5,371,family,-4,-2
+Clostridiaceae,31979,-1,-5,-9843,family,-4,-2
+Veillonellaceae,31977,-1,-5,-65827,family,-4,-2
+Bifidobacteriaceae,31953,-1,-5,36617,family,-4,-2
+Veillonella parvula,29466,-1,-5,-258,species,-4,-2
+Veillonella,29465,-1,-5,-258,genus,-4,-2
+Betaproteobacteria,28216,-1,-5,2882,class,-4,-2
+Alistipes putredinis,28117,-1,-5,-1198,species,-4,-2
+Lachnospira pectinoschiza,28052,-1,-5,-17172,species,-4,-2
+Lachnospira,28050,-1,-5,-26079,genus,-4,-2
+Bifidobacterium pseudocatenulatum,28026,-1,-5,20060,species,-4,-2
+Actinomycetaceae,2049,-1,-5,-133,family,-4,-2
+Actinomycetales,2037,-1,-5,-1875,order,-4,-2
+Actinobacteria,1760,-1,-5,22284,class,-4,-2
+Bifidobacterium adolescentis,1680,-1,-5,15314,species,-4,-2
+Bifidobacterium,1678,-1,-5,36559,genus,-4,-2
+Actinomyces,1654,-1,-5,-34,genus,-4,-2
+Clostridium,1485,-1,-5,-8549,genus,-4,-2
+Streptococcus,1301,-1,-5,-4282,genus,-4,-2
+Streptococcaceae,1300,-1,-5,-4282,family,-4,-2
+Firmicutes,1239,-1,-5,-300130,phylum,-4,-2
+Gammaproteobacteria,1236,-1,-5,-3138,class,-4,-2
+Proteobacteria,1224,-1,-5,-455,phylum,-4,-2
+Bacteroidetes,976,-1,-5,278301,phylum,-4,-2
+Selenomonas,970,-1,-5,-721,genus,-4,-2
+Megasphaera elsdenii,907,-1,-5,-3859,species,-4,-2
+Megasphaera,906,-1,-5,-7365,genus,-4,-2
+Acidaminococcus,904,-1,-5,442,genus,-4,-2
+Faecalibacterium prausnitzii,853,-1,-5,8815,species,-4,-2
+Roseburia,841,-1,-5,-91225,genus,-4,-2
+Parabacteroides distasonis,823,-1,-5,253,species,-4,-2
+Bacteroides uniformis,820,-1,-5,-5024,species,-4,-2
+Bacteroides thetaiotaomicron,818,-1,-5,1805,species,-4,-2
+Bacteroides,816,-1,-5,285576,genus,-4,-2
+Bacteroidaceae,815,-1,-5,285634,family,-4,-2
+Haemophilus parainfluenzae,729,-1,-5,-2648,species,-4,-2
+Haemophilus,724,-1,-5,-2591,genus,-4,-2
+Pasteurellaceae,712,-1,-5,-3039,family,-4,-2
+Bacteria,2,-1,-5,0,superkingdom,-4,-2
+root,1,-1,-5,0,root,-4,-2
