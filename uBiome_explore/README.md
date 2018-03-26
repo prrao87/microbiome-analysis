@@ -2,6 +2,10 @@
 
 Visualize either an individual uBiome raw JSON file's results, or compare two results to see which bacterial taxonomies changed the most.
 
+Requires pandas and matplotlib:
+
+`pip install -r requirements.txt`
+
 ## Individual plot (from `ubiome_individual.py`)
 Bar charts are used to visualize the data (instead of pie/donut charts like in the uBiome web interface) to avoid overwhelming amounts of information. Looking at just the top 20 taxonomic entities allows one to identify the most important entities from the sample, which can then be explored through google searches.
 
