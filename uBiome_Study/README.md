@@ -1,7 +1,14 @@
 # Analysis of 2017 Gut Microbiome Paper by uBiome
 ###### Almonacid DE, Kraal L, Ossandon FJ, Budovskaya YV, Cardenas JP, Bik EM, et al. (2017)
 ###### 16S rRNA gene sequencing and healthy reference ranges for 28 clinically relevant microbial taxa from the human gut microbiome. PLoS ONE 12(5): e0176555.
-## Comparison with user raw JSON results
+
+
+Python script to overlay user uBiome result values on top of uBiome 2017 study's results.
+Requires pandas, matplotlib and seaborn:
+
+`pip install -r requirements.txt`
+
+## Background
 
 In May 2017, uBiome published an [open access paper](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0176555) that discusses the 16S rRNA sequencing results for 28 clinically relevant microbial taxa from the human gut, from a total of 897 healthy subjects.
 The paper in PDF format and its associated data is placed [here](./RawData).

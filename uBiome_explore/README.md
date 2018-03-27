@@ -1,12 +1,18 @@
 # Explore individual uBiome JSON raw files
 
-Provides a quick overview of the top 20 bacterial taxonomies (by relative percentage)  from a raw uBiome JSON file.
-The ranking is done for each bacterial taxonomic classification as per the uBiome web interface.
+Visualize either an individual uBiome raw JSON file's results, or compare two results to see which bacterial taxonomies changed the most.
 
-Bar charts are used to visualize the data (instead of pie/donut charts like in the uBiome web interface) to avoid overwhelming amounts of information.
-Looking at just the top 20 taxonomic entities allows one to identify the most important entities from the sample, which can then be explored through google searches.
+Requires pandas and matplotlib:
 
-## Example plots
+`pip install -r requirements.txt`
 
-![](family.png)
-![](genus.png)
+## Individual plot (from `ubiome_individual.py`)
+Bar charts are used to visualize the data (instead of pie/donut charts like in the uBiome web interface) to avoid overwhelming amounts of information. Looking at just the top 20 taxonomic entities allows one to identify the most important entities from the sample, which can then be explored through google searches.
+
+![](individual_species.png)
+
+## Comparison plots (from `ubiome_compare.py`)
+Horizontal bar charts show the normalized taxonomy counts. Positive means the newer sample has a higher count than the older sample, and vice versa. Comparing the top and bottom of the plot shows what main groups changed the most between the two samples. 
+
+![](compare_species.png)
+![](compare_genus.png)
