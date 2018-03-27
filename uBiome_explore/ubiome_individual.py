@@ -1,23 +1,23 @@
-#!/usr/bin/env python3
 """
 Analyze individual uBiome JSON raw result file and output top 20 ranks
 """
+import os
 import json
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-path_to_JSON = "_RawData/ubiome-export-data-2018-03-03.json"
+path_to_JSON = "_RawData/"
+json_file = "ubiome-export-data-2018-03-03.json"
 # Select what taxonomy to extract: 'phylum', 'class', 'order', 'family', 'genus', 'species'
 tax_list = ['phylum', 'genus', 'species']   # Input as a list, even for single entry (to loop through)
 top = 20   # For now, plot top 20 bacterial taxonomy ranks
 savefig = True  # To save figures as png, set to 'True'
 
-def read_JSON(path_to_JSON):
+def read_JSON(json_file):
     """
     Read in uBiome JSON data and set index to tax_rank (phylum, family, genus, etc.)
     """
-    top_level = json.load(open(path_to_JSON))
+    top_level = json.load(open(json_file))
     normal_cap = top_level['ubiome_bacteriacounts'][0]['count_norm']
     data = pd.io.json.json_normalize(top_level['ubiome_bacteriacounts'])
 
@@ -74,7 +74,7 @@ def plot_bars(df, category, savefig=False):
 
 if __name__ == "__main__":
     # Read JSON and index by tax_rank
-    data, normal_cap = read_JSON(path_to_JSON)
+    data, normal_cap = read_JSON(os.path.join(path_to_JSON, json_file))
 
     # Plot data as bar charts for each taxonomic classification
     for tax in tax_list:

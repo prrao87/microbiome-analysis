@@ -3,7 +3,6 @@ Analyze individual uBiome JSON raw result file and output top 20 ranks
 """
 import os
 import json
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
