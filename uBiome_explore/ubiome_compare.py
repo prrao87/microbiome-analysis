@@ -1,5 +1,7 @@
 """
 Compare the results between two uBiome JSON files
+ - Plot comparison between groups for an old and a new flie
+ - Plot unique samples present only in old and new files
 """
 import os
 import json
@@ -82,7 +84,7 @@ def plot_unique(df1, df2, json_file1, json_file2, category, plotUnique=False):
     fig.set_size_inches(14, 8)
 
     # Plot horizontal barcharts as subplots in pandas
-    # The width here is set as a function of
+    # The bar width here is set as a function of length of the pandas series being plotted
     unique1['percent_rank'].plot(kind='barh', ax=ax[0], legend=False, width=0.01*len(unique1))
     unique2['percent_rank'].plot(kind='barh', ax=ax[1], legend=False, width=0.01*len(unique2))
     ax[0].set_ylabel('')
