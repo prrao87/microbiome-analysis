@@ -1,5 +1,5 @@
 """
-Analyze individual uBiome JSON raw result file and output top 20 ranks
+Compare the results between two uBiome JSON files
 """
 import os
 import json
@@ -9,9 +9,11 @@ import matplotlib.pyplot as plt
 path_to_JSON = "_RawData/"
 json_file1 = "ubiome-export-data-2018-03-03.json"
 json_file2 = "ubiome-export-data-2018-01-23.json"
-# Select what taxonomy to extract: 'phylum', 'class', 'order', 'family', 'genus', 'species'
-tax_list = ['phylum', 'genus', 'species']   # Input as a list, even for single entry (to loop through)
-savefig = True  # To save figures as png, set to 'True'
+
+# Input a list of taxonomies that we want to compare between JSON files
+tax_list = ['phylum', 'family', 'genus', 'species']   # ['phylum', 'class', 'order', 'family', 'genus', 'species']
+plotCompare = True  # To save comparison figures as png, set to 'True'
+plotUnique = True  # To save unique figures as png, set to 'True'
 
 def read_JSON(path_to_JSON):
     """
@@ -23,7 +25,7 @@ def read_JSON(path_to_JSON):
 
     return data, normal_cap
 
-def plot_compare(df1, df2, json_file1, json_file2, category, savefig=False):
+def plot_compare(df1, df2, json_file1, json_file2, category, plotCompare=False):
     """
     Plot comparison between two uBiome JSON Files
     Only those taxa that are common between the two datasets are plotted
@@ -33,7 +35,7 @@ def plot_compare(df1, df2, json_file1, json_file2, category, savefig=False):
     data_sorted = data.sort_values(by='diff')
 
     data_indexed = data_sorted.set_index('tax_name', drop=True)
-    data_indexed['normalized_diff'] = 100.0*(data_indexed['diff']/1000000)
+    data_indexed['normalized_diff'] = data_indexed['diff']/10000
     data_plot = data_indexed.loc[:, 'normalized_diff']
     # print(data_plot.tail(10))
 
@@ -48,8 +50,50 @@ def plot_compare(df1, df2, json_file1, json_file2, category, savefig=False):
     ax.set_title("Comparing %s level: '%s' vs. '%s'" % (category.capitalize(), json_file1, json_file2), fontsize=10)
     plt.tight_layout()
 
-    if savefig:
+    if plotCompare:
         plt.savefig('compare_'+category+'.png')
+    else: plt.show()
+    plt.close()
+
+def plot_unique(df1, df2, json_file1, json_file2, category, plotUnique=False):
+    """
+    Plot the genera and species that are unique to each sample
+    """
+    unique1 = df1[~df1.tax_name.isin(df2.tax_name)].copy()
+    unique1['percent_rank'] = (unique1['count_norm']/10000)
+    unique1 = unique1.sort_values(by='percent_rank')
+    unique1 = unique1.set_index('tax_name')
+    # print(unique1.tail())
+
+    unique2 = df2[~df2.tax_name.isin(df1.tax_name)].copy()
+    unique2['percent_rank'] = (unique2['count_norm']/10000)
+    unique2 = unique2.sort_values(by='percent_rank')
+    unique2 = unique2.set_index('tax_name')
+
+    # Error check: If DataFrame is empty, create a blank DatFrame for plotting
+    if unique1.empty:
+        unique1 = pd.DataFrame({'percent_rank': [0]})
+    if unique2.empty:
+        unique2 = pd.DataFrame({'percent_rank': [0]})
+
+    # Begin plotting with subplots
+    plt.style.use('ggplot')
+    fig, ax = plt.subplots(1, 2)
+    fig.set_size_inches(14, 8)
+
+    # Plot horizontal barcharts as subplots in pandas
+    # The width here is set as a function of
+    unique1['percent_rank'].plot(kind='barh', ax=ax[0], legend=False, width=0.01*len(unique1))
+    unique2['percent_rank'].plot(kind='barh', ax=ax[1], legend=False, width=0.01*len(unique2))
+    ax[0].set_ylabel('')
+    ax[1].set_ylabel('')
+    ax[0].set_title('Unique to New Sample (%s)' % category.capitalize(), fontsize=11)
+    ax[1].set_title('Unique to Old Sample (%s)' % category.capitalize(), fontsize=11)
+    plt.tick_params(axis='y', which='both', labelleft='off', labelright='on')
+    plt.tight_layout()
+
+    if plotUnique:
+        plt.savefig('unique_'+category+'.png')
     else: plt.show()
     plt.close()
 
@@ -63,4 +107,5 @@ if __name__ == "__main__":
         # Extract DataFrames based on taxonomy type
         df1 = data1.loc[data1['tax_rank'] == tax]
         df2 = data2.loc[data2['tax_rank'] == tax]
-        plot_compare(df1, df2, json_file1, json_file2, tax, savefig)
+        plot_compare(df1, df2, json_file1, json_file2, tax, plotCompare)
+        plot_unique(df1, df2, json_file1, json_file2, tax, plotUnique)

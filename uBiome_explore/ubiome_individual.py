@@ -7,9 +7,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 path_to_JSON = "_RawData/"
-json_file = "ubiome-export-data-2018-03-03.json"
+json_file = "ubiome-export-data-2018-01-23.json"
 # Select what taxonomy to extract: 'phylum', 'class', 'order', 'family', 'genus', 'species'
-tax_list = ['phylum', 'genus', 'species']   # Input as a list, even for single entry (to loop through)
+tax_list = ['phylum', 'family', 'genus', 'species']   # Input as a list, even for single entry (to loop through)
 top = 20   # For now, plot top 20 bacterial taxonomy ranks
 savefig = True  # To save figures as png, set to 'True'
 
@@ -48,13 +48,14 @@ def plot_bars(df, category, savefig=False):
                     ha='center', va='bottom')
 
     # Fig settings
+    plt.style.use('ggplot')     # Use ggplot style
     fig, ax = plt.subplots()
-    fig.set_size_inches(8, 8)
+    fig.set_size_inches(12, 6)
 
     # Plot each bar separately and give it a label, with number displayed above label
     for index, row in data.iterrows():
         rects = ax.bar([row['tax_name']], [row['percent_rank']], label=row['tax_name'],
-               alpha=0.5, align='center')
+               alpha=0.5, align='center', width=0.03*len(data))
         autolabel(rects)
 
     # Axis settings
@@ -62,8 +63,9 @@ def plot_bars(df, category, savefig=False):
     ax.margins(0.05)
     ax.legend(loc='best', prop={'size': 10}, frameon=False)
     ax.set_ylim(bottom=0)
-    ax.patch.set_facecolor('0.95')
-    ax.grid(color='white', linestyle='-')
+    ax.set_ylabel("Normalized Count (%)")
+    # ax.patch.set_facecolor('0.95')
+    ax.grid(color='white', linestyle='-', alpha=0.5)
     ax.set(axisbelow=True, xticklabels=[])
     plt.tight_layout()
 
