@@ -1,4 +1,8 @@
 # Explore individual uBiome JSON raw files
+I wrote about this exercise and how I explored my uBiome raw data on [Medium.](https://medium.com/@laminarflow027/the-effect-of-a-high-fiber-diet-on-my-microbiome-d426c6bc29f8)
+
+
+These Python scripts do the following:
 
 - Visualize either an individual uBiome raw JSON file's results
 - Compare two results to see which bacterial taxonomies changed the most. 
