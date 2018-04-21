@@ -40,59 +40,33 @@ def analyze_ranks(df, normal_cap, rank_type):
 
     return rank_data_sorted
 
-def create_boxplot_matplotlib(example_data, my_data, savefig):
-    """
-    Plot a box plot at the genus level to replicate Fig 3. in the uBiome paper
-    The individual JSON uBiome result is overlayed on the boxplot as red squares
-    """
-    ax = example_data.plot.box(logy=True, figsize=(10, 8), whis=[0, 100.0], meanline=True, \
-    showmeans=True, showfliers=False)
-    ax.set_xticklabels(my_data.columns.tolist(), rotation=30, fontsize=8)
-    ax.set_ylim(bottom=0.0001, top=100)
-    ax.set_ylabel("Relative Abundance (%)")
-    ax.set_title("Boxplot of Relative Abundance")
-
-    # Bee-swarm plot of all data points on top of boxplot - plain ol' matplotlib scatter
-    for i in range(len(example_data.columns)):
-        y = example_data.iloc[:, i]
-        x = np.random.normal(1+i, 0.04, size=len(y))
-        plt.scatter(x, y, color='k', marker='+', alpha=0.1)
-
-    # Add individual values from my JSON (pandas boxplot starts indexing from 1, which is weird)
-    # Hence we begin the range of x-values from 1 instead of zero
-    plt.scatter(list(range(1, len(example_data.columns)+1)), my_data.values[0], \
-    color='r', marker='*', s=150)
-    plt.tight_layout()
-
-    if savefig == True:
-        plt.savefig('boxplot.png')
-    else: plt.show()
-
-def create_boxplot_seaborn(example_data, my_data, savefig):
+def create_boxplot_seaborn(genus, my_data, savefig):
     """
     Same as create_boxplot_matplotlib, but implemented with seaborn
     """
-    fig, ax = plt.subplots()
-    ax.set_xticklabels(my_data.columns.tolist(), rotation=30, fontsize=8)
+    fig, ax = plt.subplots(figsize=(10,6))
+    ax.set_xticklabels(genus.columns.tolist(), rotation=30, fontsize=8)
     ax.set(yscale='log')
     ax.set_ylim(bottom=0.0001, top=100)
     ax.set_ylabel("Relative Abundance (%)")
     ax.set_title("Boxplot of Relative Abundance")
 
     # Seaborn boxplot of uBiome data
-    sns.boxplot(data=example_data, linewidth=0.75, width=0.5, fliersize=3, \
+    sns.boxplot(data=genus, linewidth=0.75, width=0.5, fliersize=3, \
     whis=[0, 100.0], meanline=True, showfliers=False, showmeans=True)
-    # Add transparency to colors
+
+    # Add transparency to colors (per Michael Waskom's method)
+    # https://github.com/mwaskom/seaborn/issues/979
     for patch in ax.artists:
         r, g, b, a = patch.get_facecolor()
         patch.set_facecolor((r, g, b, .3))
 
     # Scatter plot with jitter enabled
-    sns.stripplot(data=example_data, alpha=0.1, jitter=True, marker='o', \
+    sns.stripplot(data=genus, alpha=0.1, jitter=True, marker='o', \
     edgecolor='k', linewidth=0.5)
 
     # Add individual values from user JSON
-    plt.scatter(list(range(0, len(example_data.columns))), my_data.values[0], \
+    plt.scatter(my_data.columns, my_data.values[0], \
     color='r', marker='*', s=150, zorder=25)
     plt.tight_layout()
 
@@ -109,17 +83,20 @@ def main(path_to_JSON, path_to_xlsx, json_rank_type, savefig=False):
     json_ranked_pivot = json_ranked.pivot(index='tax_rank', columns='tax_name', \
     values='percent_rank')
 
+    # Read in data from uBiome study
     species, genus = read_xl(path_to_xlsx)
 
-    # Pivoted data from JSON is matched with corresponding column name in the research study
-    example_data = genus[genus.columns & json_ranked_pivot.columns]
-    my_data = json_ranked_pivot[genus.columns & json_ranked_pivot.columns]
-    my_data = my_data.reset_index(drop=True)
-    print("Found the following genera in JSON matching with those in research study:\n")
-    print(my_data.head())
-    print(example_data.head())
+    # Find unique and common column names between my uBiome raw data and uBiome study
+    common = genus.columns.intersection(json_ranked_pivot.columns)
+    unique = genus.columns.difference(json_ranked_pivot.columns)
 
-    create_boxplot_seaborn(example_data, my_data, savefig)
+    # Cast zero-values for all genera that do not exist in my data
+    my_data = json_ranked_pivot[common].copy()
+    for col in unique:
+        my_data[col] = 0.0
+
+    # Comparison boxplot between my data and uBiome study
+    create_boxplot_seaborn(genus, my_data, savefig)
 
 if __name__ == "__main__":
     # Only plot w.r.t. genus level as individual species detection is not reliable for now
